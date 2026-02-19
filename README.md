@@ -1,4 +1,4 @@
-# # Cerviño Bernabé - Junior Fullstack Developer Challenge
+## Cerviño Bernabé - Junior Fullstack Developer Challenge
 
 Solución técnica para el challenge de Nimble Gravity.
 
