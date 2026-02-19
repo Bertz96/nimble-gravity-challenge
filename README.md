@@ -1,69 +1,74 @@
-# Cerviño Bernabé - Junior Fullstack Developer Challenge
+# # Cerviño Bernabé - Junior Fullstack Developer Challenge
+
+Solución técnica para el challenge de Nimble Gravity.
 
 ## Requisitos
+
 - Usar React (cualquier versión).
 - Mostrar un listado de posiciones obtenido de la API.
 - Cada posición debe tener un campo de input para la URL del repo de GitHub y un botón "Submit".
 - El botón debe hacer el POST con el body correcto.
 - Manejar estados de carga y error en la UI.
 
+## Tecnologías Utilizadas
 
-# Pasos
-### Step 1 — Crear el repositorio en GitHub
-Creá un repositorio público en GitHub. Hacé al menos un commit inicial y tené a mano la URL del repo (ej: https://github.com/tu-usuario/tu-repo). La vas a necesitar en el Step 5.
+- **Core:** React 19, TypeScript, Vite.
+- **Estilos:** Tailwind CSS v4 (Mobile First & Responsive Design).
+- **Arquitectura:** Modular (Services, Hooks, Atomic Components).
+- **Estado:** Custom Hooks para gestión de API (`useJobs`, `useCandidate`).
 
-### Step 2 — Obtener tus datos de candidato
-Hacé una llamada GET a la API pasando tu email como parámetro:
+## Características Implementadas
 
-GET {BASE_URL}/api/candidate/get-by-email?email=TU_EMAIL
-Respuesta (200):
+1.  **Arquitectura Limpia:** Separación estricta de responsabilidades.
+    - `services/`: Capa de abstracción para fetch y manejo de errores HTTP.
+    - `hooks/`: Lógica de negocio y ciclo de vida (loading/error/success).
+    - `components/ui/`: UI Kit reutilizable (Card, Button, Input).
+2.  **UX/UI Robusta:**
+    - Indicador visual de estado de sesión (Conexión con API).
+    - Feedback inmediato al usuario (Spinners, Toasts nativos, Badges).
+    - Validación de inputs (Sanitización con `.trim()` antes del envío).
+    - Diseño responsive adaptado a móviles y escritorio.
+3.  **Seguridad & Buenas Prácticas:**
+    - Tipado estricto con TypeScript (Interfaces para Payload y Responses).
+    - Manejo de errores centralizado.
+    - Variables de entorno para endpoints de API.
 
-{
-  "uuid": "a1b2c3d4-...",
-  "candidateId": "a1b2c3d4",
-  "applicationId": "a1b2c3d4",
-  "firstName": "Jane",
-  "lastName": "Doe",
-  "email": "jane.doe@example.com"
-}
-Estos los vas a usar para enviar tu postulación.
+## Cómo ejecutar el proyecto
 
-### Step 3 — Obtener la lista de posiciones abiertas
-Hacé una llamada GET para obtener las posiciones disponibles:
+1.  **Clonar el repositorio:**
 
-GET {BASE_URL}/api/jobs/get-list
-Respuesta (200):
+    ```bash
+    git clone https://github.com/Bertz96/nimble-gravity-challenge
+    cd nimble-gravity-challenge
+    ```
 
-[
-  { "id": "4416372005", "title": "Fullstack developer" },
-  { "id": "9100000001", "title": "Head Chef" }
-]
-### Step 4 — Mostrar un listado de posiciones
-Creá un componente en React que muestre un listado de las posiciones obtenidas en el paso anterior. Cada item de la lista debe incluir:
+2.  **Instalar dependencias:**
 
-Título de la posición (title)
-Un campo de input donde puedas ingresar la URL de tu repositorio de GitHub
-Un botón "Submit" para enviar tu postulación a esa posición
-Usá el estilo que prefieras — lo importante es que se vea prolijo y funcional.
+    ```bash
+    npm install
+    ```
 
-### Step 5 — Enviar tu postulación
-Presioná el botón "Submit" para la posición a la que estás aplicando dentro de esta lista, llamando a la API con el siguiente body:
+3.  **Configurar Variables de Entorno:**
+    Crear un archivo `.env` en la raíz, reemplazando BASE_URL con la URL del challenge:
 
-POST {BASE_URL}/api/candidate/apply-to-job
-Content-Type: application/json
-Body:
+    ```env
+    VITE_BASE_URL="BASE_URL"
+    ```
 
-{
-  "uuid": "tu uuid (del Step 2)",
-  "jobId": "id de la posición (del Step 3)",
-  "candidateId": "tu candidateId (del Step 2)",
-  "repoUrl": "https://github.com/tu-usuario/tu-repo"
-}
-Campo	Valor
-uuid	Tu uuid obtenido en el Step 2
-jobId	El id de la posición desde la que hacés submit
-candidateId	Tu candidateId obtenido en el Step 2
-repoUrl	URL de tu repositorio de GitHub
-Respuesta exitosa (200):
+4.  **Correr en desarrollo:**
+    ```bash
+    npm run dev
+    ```
 
-{ "ok": true }
+## Estructura del Proyecto
+
+```text
+src/
+├── components/       # Componentes visuales
+│   ├── ui/           # Átomos (Button, Input, Card)
+│   └── JobCard.tsx   # Tarjeta de postulación
+├── hooks/            # Lógica de React (useJobs, useCandidate)
+├── services/         # Comunicación con API externa
+├── types/            # Definiciones TypeScript (Interfaces)
+└── App.tsx           # Integración principal
+```
