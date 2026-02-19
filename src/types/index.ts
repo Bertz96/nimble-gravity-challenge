@@ -33,6 +33,7 @@ export interface ApplicationPayload {
   uuid: string;
   jobId: string;
   candidateId: string;
+  applicationId: string;
   /** URL del repositorio público de GitHub */
   repoUrl: string;
 }

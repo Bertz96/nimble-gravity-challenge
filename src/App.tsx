@@ -33,6 +33,7 @@ function App() {
         uuid: candidate.uuid,
         candidateId: candidate.candidateId,
         jobId: jobId,
+        applicationId: candidate.applicationId,
         repoUrl: repoUrl,
       };
 
