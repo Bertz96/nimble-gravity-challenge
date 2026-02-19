@@ -7,7 +7,7 @@ import type {
 
 // Obtenemos la URL base de las variables de entorno.
 // IMPORTANTE: Asegurarse de tener un archivo .env con esta variable definida.
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 /**
  * Helper genérico para procesar respuestas HTTP.
